@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StatusBar, SafeAreaView, Platform } from "react-native";
+import { StatusBar, SafeAreaView, Platform, View } from "react-native";
 
 // CONF PLATFORMS 
 const confPlatform = Platform.select({
@@ -56,9 +56,11 @@ class Custom_statusBar extends Component {
 
         else if (this.props.barType === 'HIDDEN') {
             return (
-                <SafeAreaView>
+
+                <View>
                     <StatusBar hidden={true} backgroundColor={confPlatformBlack.backgroundColor} barStyle={confPlatformBlack.barStyle} />
-                </SafeAreaView>
+                </View>
+
             );
         }
         else {
