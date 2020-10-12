@@ -14,9 +14,9 @@ export const GRAY_DARK = '#F1F1F1';
 // BLUESCALE
 export const BLUE_LIGHT = '#1E469B';
 // GREENSCALE
-export const BLUE_LIGHT = '#38B04F';
+export const GREEN_LIGHT = '#38B04F';
 // REDSCALE
-export const BLUE_LIGHT = '#DD2434';
+export const RED_LIGHT = '#DD2434';
 
 
 // SHADOW
