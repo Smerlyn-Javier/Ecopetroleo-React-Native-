@@ -24,6 +24,10 @@ function Article(props) {
     );
 }
 
+
+// SCENES
+import {First_screen, Splash_screen} from '../../scenes'
+
 const Drawer = createDrawerNavigator();
 
 function Leftsidebar() {
@@ -36,13 +40,15 @@ function Leftsidebar() {
 
                 }}>
 
-                <Drawer.Screen
-                    name="Feed"
-                    component={Feed}
-                    options={{ drawerLabel: 'Home' }, { gestureEnabled: true }}
-                />
+            <Drawer.Screen
+                name="Splash_screen"
+                component={Splash_screen}
+                options={{ drawerLabel: 'Home' }, { gestureEnabled: true }}
+            />
+            
+                <Drawer.Screen name="First_screen" component={First_screen} />
 
-                <Drawer.Screen name="Article" component={Article} />
+
             </Drawer.Navigator>
         </NavigationContainer>
     );
