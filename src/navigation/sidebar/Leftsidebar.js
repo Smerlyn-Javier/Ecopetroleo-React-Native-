@@ -26,7 +26,7 @@ function Article(props) {
 
 
 // SCENES
-import {First_screen, Splash_screen} from '../../scenes'
+import { First_screen, Splash_screen, Sign_up, Log_in } from '../../scenes'
 
 const Drawer = createDrawerNavigator();
 
@@ -40,13 +40,29 @@ function Leftsidebar() {
 
                 }}>
 
-            <Drawer.Screen
-                name="Splash_screen"
-                component={Splash_screen}
-                options={{ drawerLabel: 'Home' }, { gestureEnabled: true }}
-            />
-            
-                <Drawer.Screen name="First_screen" component={First_screen} />
+                <Drawer.Screen
+                    name="Splash_screen"
+                    component={Splash_screen}
+                    options={{ drawerLabel: 'Splash screen' }, { gestureEnabled: true }}
+                />
+
+                <Drawer.Screen
+                    name="First_screen"
+                    component={First_screen}
+                    options={{ drawerLabel: 'First screen' }, { gestureEnabled: true }}
+                />
+
+                <Drawer.Screen
+                    name="Log_in"
+                    component={Log_in}
+                    options={{ drawerLabel: 'Log in' }, { gestureEnabled: true }}
+                />
+
+                <Drawer.Screen
+                    name="Sign_up"
+                    component={Sign_up}
+                    options={{ drawerLabel: 'Sign up' }, { gestureEnabled: true }}
+                />
 
 
             </Drawer.Navigator>
