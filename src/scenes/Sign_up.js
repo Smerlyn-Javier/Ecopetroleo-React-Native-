@@ -14,7 +14,7 @@ const vertical_logo = require('../assets/images/resources/vertical-logo.png')
 
 
 
-function Sign_up() {
+function Sign_up(props) {
 
     let [Hide_or_Show, setHideShow] = useState(true);
     const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
@@ -69,7 +69,8 @@ function Sign_up() {
 
 
                     <Text style={styles.errorText}>*Error</Text>
-                    <TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => {props.navigation.navigate('Log_in')}}>
                         <Text style={styles.haveAcount}>Ya tengo una cuenta</Text>
                     </TouchableOpacity>
                 </View>
