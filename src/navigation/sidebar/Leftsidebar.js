@@ -26,7 +26,7 @@ function Article(props) {
 
 
 // SCENES
-import { First_screen, Splash_screen, Sign_up, Log_in } from '../../scenes'
+import { First_screen, Splash_screen, Sign_up, Log_in,Password_recovery } from '../../scenes'
 
 const Drawer = createDrawerNavigator();
 
@@ -62,6 +62,12 @@ function Leftsidebar() {
                     name="Sign_up"
                     component={Sign_up}
                     options={{ drawerLabel: 'Sign up' }, { gestureEnabled: true }}
+                />
+
+                 <Drawer.Screen
+                    name="Password_recovery"
+                    component={Password_recovery}
+                    options={{ drawerLabel: 'Password recovery' }, { gestureEnabled: true }}
                 />
 
 
