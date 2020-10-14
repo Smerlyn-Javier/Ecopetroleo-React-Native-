@@ -43,31 +43,31 @@ function Leftsidebar() {
                 <Drawer.Screen
                     name="Splash_screen"
                     component={Splash_screen}
-                    options={{ drawerLabel: 'Splash screen' }, { gestureEnabled: true }}
+                    options={{ drawerLabel: 'Splash screen' }, { gestureEnabled: false }}
                 />
 
                 <Drawer.Screen
                     name="First_screen"
                     component={First_screen}
-                    options={{ drawerLabel: 'First screen' }, { gestureEnabled: true }}
+                    options={{ drawerLabel: 'First screen' }, { gestureEnabled: false }}
                 />
 
                 <Drawer.Screen
                     name="Log_in"
                     component={Log_in}
-                    options={{ drawerLabel: 'Log in' }, { gestureEnabled: true }}
+                    options={{ drawerLabel: 'Log in' }, { gestureEnabled: false }}
                 />
 
                 <Drawer.Screen
                     name="Sign_up"
                     component={Sign_up}
-                    options={{ drawerLabel: 'Sign up' }, { gestureEnabled: true }}
+                    options={{ drawerLabel: 'Sign up' }, { gestureEnabled: false }}
                 />
 
                  <Drawer.Screen
                     name="Password_recovery"
                     component={Password_recovery}
-                    options={{ drawerLabel: 'Password recovery' }, { gestureEnabled: true }}
+                    options={{ drawerLabel: 'Password recovery' }, { gestureEnabled: false }}
                 />
 
 
