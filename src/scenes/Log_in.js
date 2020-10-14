@@ -59,7 +59,7 @@ function Log_in(props) {
 
                     <View style={styles.labels}>
                         
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => {props.navigation.navigate('Password_recovery')}}>
                         <Text style={styles.haveAcount}>¿Olvidante tu contraseña?</Text>
                     </TouchableOpacity>
 
