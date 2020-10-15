@@ -12,6 +12,9 @@ function Feed() {
     );
 }
 
+// DRAWER CONTENT 
+import DrawerContent from './DrawerContent'
+
 function Article(props) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -26,48 +29,96 @@ function Article(props) {
 
 
 // SCENES
-import { First_screen, Splash_screen, Sign_up, Log_in,Password_recovery } from '../../scenes'
-
+import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery } from '../../scenes'
+// SCREEMS 
+import { About_us } from '../../screens'
 const Drawer = createDrawerNavigator();
+
+// STYLES
+import {Colors} from '../../assets/styles'
 
 function Leftsidebar() {
     return (
         <NavigationContainer>
             <Drawer.Navigator
+            
+            drawerType="slide"
+            drawerPosition="left"
                 drawerContentOptions={{
-                    activeTintColor: '#e91e63',
-                    itemStyle: { marginVertical: 30 },
+                    activeTintColor: "red",
+                    activeBackgroundColor:'red',
+                    itemStyle: {color:'white'},
 
-                }}>
-
+                }}
+                
+                drawerContent={props => <DrawerContent {...props}/> }
+                >
                 <Drawer.Screen
                     name="Splash_screen"
                     component={Splash_screen}
-                    options={{ drawerLabel: 'Splash screen' }, { gestureEnabled: false }}
+                    options={
+                        {
+                            gestureEnabled: false,
+                            drawerLabel: 'Splash screen',
+                            
+                        }
+                    }
                 />
 
                 <Drawer.Screen
                     name="First_screen"
                     component={First_screen}
-                    options={{ drawerLabel: 'First screen' }, { gestureEnabled: false }}
+                    options={
+                        {
+                            gestureEnabled: false,
+                            drawerLabel: 'First screen'
+                        }
+                    }
                 />
 
                 <Drawer.Screen
                     name="Log_in"
                     component={Log_in}
-                    options={{ drawerLabel: 'Log in' }, { gestureEnabled: false }}
+                    options={
+                        {
+                            gestureEnabled: false,
+                            drawerLabel: 'Log in'
+                        }
+                    }
                 />
 
                 <Drawer.Screen
                     name="Sign_up"
                     component={Sign_up}
-                    options={{ drawerLabel: 'Sign up' }, { gestureEnabled: false }}
+                    options={
+                        {
+                            gestureEnabled: false,
+                            drawerLabel: 'Sign up'
+                        }
+                     
+                    }
                 />
 
-                 <Drawer.Screen
+                <Drawer.Screen
                     name="Password_recovery"
                     component={Password_recovery}
-                    options={{ drawerLabel: 'Password recovery' }, { gestureEnabled: false }}
+                    options={
+                        {
+                            gestureEnabled: false,
+                            drawerLabel: 'Password recovery',
+                        }
+                    }
+                />
+
+                <Drawer.Screen
+                    name="About_us"
+                    component={About_us}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'About us',
+                        }
+                    }
                 />
 
 
