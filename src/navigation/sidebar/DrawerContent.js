@@ -71,7 +71,7 @@ function DrawerContent(props) {
                                 )}
                                 label="PROMOCIONES Y EVENTOS"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
+                                onPress={() => { props.navigation.navigate('Promotions') }}
                             />
 
                             <DrawerItem

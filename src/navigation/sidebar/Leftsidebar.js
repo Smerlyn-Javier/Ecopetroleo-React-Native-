@@ -31,7 +31,7 @@ function Article(props) {
 // SCENES
 import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery } from '../../scenes'
 // SCREEMS 
-import { About_us } from '../../screens'
+import { About_us,Promotions } from '../../screens'
 const Drawer = createDrawerNavigator();
 
 // STYLES
@@ -120,6 +120,17 @@ function Leftsidebar() {
                         }
                     }
                 />
+
+              <Drawer.Screen
+                    name="Promotions"
+                    component={Promotions}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'Promotions',
+                        }
+                    }
+                /> 
 
 
             </Drawer.Navigator>
