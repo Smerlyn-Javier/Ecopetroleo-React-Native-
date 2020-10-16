@@ -1,15 +1,15 @@
 import React from 'react'
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-
+import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity,Platform } from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // STYLES
 import { Colors, Typography } from '../../assets/styles'
 
+
 function CustomHeader(props) {
     return (
-        <SafeAreaView>
+        
             <View style={styles.headerContainer}>
 
                 <TouchableOpacity onPress={() => {  props.context.navigation.openDrawer() }}>
@@ -19,7 +19,7 @@ function CustomHeader(props) {
                 <Text style={styles.textName}>{props.name}</Text>
                 <Text></Text>
             </View>
-        </SafeAreaView>
+      
     )
 }
 
@@ -27,9 +27,16 @@ const styles = StyleSheet.create({
     headerContainer: {
         padding: 16,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: Platform.select({
+            ios:'flex-end',
+            android:'center'
+        }),
         backgroundColor: Colors.BLUE_LIGHT,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        height: Platform.select({
+            ios:100,
+            android:50
+        }),
     },
 
     textName: {
