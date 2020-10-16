@@ -82,7 +82,7 @@ function DrawerContent(props) {
                                 )}
                                 label="ECO TIPS"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
+                                onPress={() => { props.navigation.navigate('Tips') }}
                             />
 
                             <DrawerItem

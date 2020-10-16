@@ -4,55 +4,35 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 
-function Feed() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Feed Screen</Text>
-        </View>
-    );
-}
 
 // DRAWER CONTENT 
 import DrawerContent from './DrawerContent'
 
-function Article(props) {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Article Screen</Text>
-            <Button
-                title="Learn More"
-                color="#841584"
-                onPress={() => props.navigation.openDrawer()} />
-        </View>
-    );
-}
-
-
 // SCENES
 import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery } from '../../scenes'
 // SCREEMS 
-import { About_us,Promotions } from '../../screens'
+import { About_us, Promotions, Tips } from '../../screens'
 const Drawer = createDrawerNavigator();
 
 // STYLES
-import {Colors} from '../../assets/styles'
+import { Colors } from '../../assets/styles'
 
 function Leftsidebar() {
     return (
         <NavigationContainer>
             <Drawer.Navigator
-            
-            drawerType="slide"
-            drawerPosition="left"
+
+                drawerType="slide"
+                drawerPosition="left"
                 drawerContentOptions={{
                     activeTintColor: "red",
-                    activeBackgroundColor:'red',
-                    itemStyle: {color:'white'},
+                    activeBackgroundColor: 'red',
+                    itemStyle: { color: 'white' },
 
                 }}
-                
-                drawerContent={props => <DrawerContent {...props}/> }
-                >
+
+                drawerContent={props => <DrawerContent {...props} />}
+            >
                 <Drawer.Screen
                     name="Splash_screen"
                     component={Splash_screen}
@@ -60,7 +40,7 @@ function Leftsidebar() {
                         {
                             gestureEnabled: false,
                             drawerLabel: 'Splash screen',
-                            
+
                         }
                     }
                 />
@@ -95,7 +75,7 @@ function Leftsidebar() {
                             gestureEnabled: false,
                             drawerLabel: 'Sign up'
                         }
-                     
+
                     }
                 />
 
@@ -121,7 +101,7 @@ function Leftsidebar() {
                     }
                 />
 
-              <Drawer.Screen
+                <Drawer.Screen
                     name="Promotions"
                     component={Promotions}
                     options={
@@ -130,7 +110,18 @@ function Leftsidebar() {
                             drawerLabel: 'Promotions',
                         }
                     }
-                /> 
+                />
+
+                <Drawer.Screen
+                    name="Tips"
+                    component={Tips}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'Tips',
+                        }
+                    }
+                />
 
 
             </Drawer.Navigator>

@@ -23,9 +23,18 @@ function Items(props) {
     }
     else if (props.type === 'TIPS') {
         return (
-            <View>
-                <Text></Text>
+            <View style={styles.tipsItemContainer}>
+
+            <View style={styles.tipsImage}>
+                <Image style={styles.tipsImage} source={props.image} />
             </View>
+
+            <View style={styles.tipsDescriptionContainer}>
+                <Text style={styles.tipsTitle}>{props.title}</Text>
+                <Text style={styles.tipsDescription}>{props.description}</Text>
+            </View>
+
+        </View>
         )
     }
     else if (props.type === 'PRICES') {
@@ -56,7 +65,6 @@ const styles = StyleSheet.create({
     },
     promotionsDescription:{
       paddingHorizontal:10,
-    //   justifyContent:'center',
       
     },
     promoTitle:{
@@ -68,6 +76,30 @@ const styles = StyleSheet.create({
     promoDescription:{
      fontSize:12,
      fontWeight:'200'
-    }
+    },
+
+    // TIPS
+    tipsItemContainer: {
+        display:'flex',
+        flexDirection:'row',
+    },
+    tipsImage:{
+        height:100,
+        width:100
+    },
+    tipsDescriptionContainer:{
+      paddingHorizontal:10,
+      
+    },
+    tipsTitle:{
+     fontSize:16,
+     fontWeight:'bold',
+     color:Colors.BLUE_LIGHT,
+     marginBottom:5
+    },
+    tipsDescription:{
+     fontSize:12,
+     fontWeight:'200'
+    },
 })
 export default Items;
