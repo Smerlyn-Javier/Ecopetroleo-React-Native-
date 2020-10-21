@@ -93,7 +93,7 @@ function DrawerContent(props) {
                                 )}
                                 label="CONTACTO Y AYUDA"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
+                                onPress={() => { props.navigation.navigate('Contacts') }}
                             />
 
                             <DrawerItem

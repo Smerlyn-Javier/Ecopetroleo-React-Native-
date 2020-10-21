@@ -11,7 +11,7 @@ import DrawerContent from './DrawerContent'
 // SCENES
 import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery } from '../../scenes'
 // SCREEMS 
-import { About_us, Promotions, Tips } from '../../screens'
+import { About_us, Promotions, Tips, Contacts } from '../../screens'
 const Drawer = createDrawerNavigator();
 
 // STYLES
@@ -119,6 +119,18 @@ function Leftsidebar() {
                         {
                             gestureEnabled: true,
                             drawerLabel: 'Tips',
+                        }
+                    }
+                />
+
+
+                <Drawer.Screen
+                    name="Contacts"
+                    component={Contacts}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'Contacts',
                         }
                     }
                 />
