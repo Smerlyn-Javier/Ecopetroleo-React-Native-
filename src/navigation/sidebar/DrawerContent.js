@@ -59,7 +59,7 @@ function DrawerContent(props) {
                                 )}
                                 label="PRECIOS DE COMBUSTIBLES"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
+                                onPress={() => { props.navigation.navigate('Prices') }}
                             />
 
 
