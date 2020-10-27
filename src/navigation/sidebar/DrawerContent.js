@@ -96,7 +96,7 @@ function DrawerContent(props) {
                                 onPress={() => { props.navigation.navigate('Contacts') }}
                             />
 
-                            <DrawerItem
+                            {/* <DrawerItem
                                 icon={({ color, size }) => (
                                     <Icon
                                         name="tools" size={size} color={color}
@@ -105,7 +105,7 @@ function DrawerContent(props) {
                                 label="CONFIGURACIÓN"
                                 labelStyle={styles.labelStyle}
                                 onPress={() => { props.navigation.navigate('First_screen') }}
-                            />
+                            /> */}
 
 
 
