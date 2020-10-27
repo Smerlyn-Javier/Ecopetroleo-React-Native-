@@ -47,7 +47,7 @@ function DrawerContent(props) {
                                 )}
                                 label="ENCUENTRANOS"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
+                                onPress={() => { props.navigation.navigate('Info_station') }}
                             />
 
 
