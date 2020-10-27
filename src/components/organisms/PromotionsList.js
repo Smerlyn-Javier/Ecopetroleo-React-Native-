@@ -25,7 +25,7 @@ function PromotionsList(props) {
         <View>
             {
                 data.map((element, key) => (
-                    <ListItem key={key} bottomDivider={true} onPress={(event) => { console.log(event) }}>
+                    <ListItem key={key} bottomDivider={true} onPress={() => { props.context.navigation.navigate('Info_promotions') }}>
                         <ListItem.Content>
                             <Items type='PROMOTIONS' image={element.testImage} title={element.title} description={element.description} />
                         </ListItem.Content>

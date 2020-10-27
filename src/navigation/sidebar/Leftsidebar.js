@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import DrawerContent from './DrawerContent'
 
 // SCENES
-import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery,Info_station } from '../../scenes'
+import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery,Info_station,Info_promotions,Info_tips } from '../../scenes'
 // SCREEMS 
 import { About_us, Promotions, Tips, Contacts, Prices } from '../../screens'
 const Drawer = createDrawerNavigator();
@@ -152,6 +152,26 @@ function Leftsidebar() {
                         {
                             gestureEnabled: true,
                             drawerLabel: 'Info_station',
+                        }
+                    }
+                />
+                <Drawer.Screen
+                    name="Info_promotions"
+                    component={Info_promotions}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'Info_promotions',
+                        }
+                    }
+                />
+                <Drawer.Screen
+                    name="Info_tips"
+                    component={Info_tips}
+                    options={
+                        {
+                            gestureEnabled: true,
+                            drawerLabel: 'Info_tips',
                         }
                     }
                 />

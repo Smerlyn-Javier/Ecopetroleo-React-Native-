@@ -31,7 +31,7 @@ function Promotions(props) {
         <View style={styles.container}>
             <CustomHeader name='Promociones y eventos' context={props} />
             <ScrollView style={styles.scrollContainer}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-                <PromotionsList/>
+                <PromotionsList context={props}/>
             </ScrollView>
         </View>
     )
