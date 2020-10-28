@@ -49,7 +49,7 @@ function Log_in(props) {
                     <TouchableOpacity style={styles.button1}
                         onPress={() => {
                             alert('You tapped the button!');
-                            props.navigation.navigate('MapView')
+                            props.navigation.navigate('MapViewScreen')
                         }} >
                         <Text style={styles.button1_text}>Ingresar</Text>
                     </TouchableOpacity>

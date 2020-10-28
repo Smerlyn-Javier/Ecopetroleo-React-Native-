@@ -11,7 +11,7 @@ import DrawerContent from './DrawerContent'
 // SCENES
 import { First_screen, Splash_screen, Sign_up, Log_in, Password_recovery,Info_station,Info_promotions,Info_tips } from '../../scenes'
 // SCREEMS 
-import { About_us, Promotions, Tips, Contacts, Prices,MapView } from '../../screens'
+import { About_us, Promotions, Tips, Contacts, Prices,MapViewScreen } from '../../screens'
 const Drawer = createDrawerNavigator();
 
 // STYLES
@@ -176,12 +176,12 @@ function Leftsidebar() {
                     }
                 />
                  <Drawer.Screen
-                    name="MapView"
-                    component={MapView}
+                    name="MapViewScreen"
+                    component={MapViewScreen}
                     options={
                         {
                             gestureEnabled: true,
-                            drawerLabel: 'MapView',
+                            drawerLabel: 'MapViewScreen',
                         }
                     }
                 />

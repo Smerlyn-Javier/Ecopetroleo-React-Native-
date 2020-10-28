@@ -47,7 +47,7 @@ function DrawerContent(props) {
                                 )}
                                 label="ENCUENTRANOS"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('MapView') }}
+                                onPress={() => { props.navigation.navigate('MapViewScreen') }}
                             />
 
 
