@@ -6,6 +6,8 @@ platform :ios, '10.0'
 target 'Ecopetroleo' do
   config = use_native_modules!
 
+  # Pods for ReactNativeMaps
+  pod 'GoogleMaps'
   use_react_native!(:path => config["reactNativePath"])
 
   target 'EcopetroleoTests' do
