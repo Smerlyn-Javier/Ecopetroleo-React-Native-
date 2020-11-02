@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 // COMPONENTS
 import { CustomHeader } from '../components/organisms'
@@ -21,7 +21,15 @@ function MapViewScreen(props) {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
-                />
+                >
+                    <Marker
+                        coordinate={{ latitude: 18.735693, longitude: -70.162651 }}
+                        title='ESTACION II'
+                        image={require('../assets/images/resources/Marker-icon-ios.png')}
+                        onPress={() => { props.navigation.navigate('Info_station') }}
+                    />
+
+                </MapView>
             </View>
         )
     }
@@ -40,7 +48,15 @@ function MapViewScreen(props) {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
-                />
+                >
+                    <Marker
+                        coordinate={{ latitude: 18.735693, longitude: -70.162651 }}
+                        title='ESTACION II'
+                        image={require('../assets/images/resources/Marker-icon.png')}
+                        onPress={() => { props.navigation.navigate('Info_station') }}
+                    />
+
+                </MapView>
             </View>
         )
     }
