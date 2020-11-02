@@ -2,6 +2,12 @@
   package="com.ecopetroleo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+<application>   
+      <meta-data      
+      android:name="com.google.android.geo.API_KEY"      
+      android:value="AIzaSyBccw2HQt-QocznbohwpqYxZfcfvmRfa_s"
+      />
+</application>
 
     <application
       android:name=".MainApplication"
@@ -10,6 +16,9 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
+
+
+
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
