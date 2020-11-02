@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet,Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
@@ -7,14 +7,14 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { CustomHeader } from '../components/organisms'
 
 function MapViewScreen(props) {
-    if(Platform.OS === 'ios'){
-        
+    if (Platform.OS === 'ios') {
+
         return (
-            <View>
-            <CustomHeader name='Encuentrate' context={props} />
-    
+            <View style={styles.containerIos}>
+                <CustomHeader name='Encuentrate' context={props} />
+
                 <MapView
-                    style={styles.map}
+                    style={styles.mapIos}
                     initialRegion={{
                         latitude: 18.735693,
                         longitude: -70.162651,
@@ -25,15 +25,15 @@ function MapViewScreen(props) {
             </View>
         )
     }
-    else if(Platform.OS === 'android'){
-        
+    else if (Platform.OS === 'android') {
+
         return (
-            <View>
-            <CustomHeader name='Encuentranos' context={props} />
-    
+            <View style={styles.containerAndroid}>
+                <CustomHeader name='Encuentranos' context={props} />
+
                 <MapView
                     provider={PROVIDER_GOOGLE}
-                    style={styles.map}
+                    style={styles.mapAndroid}
                     initialRegion={{
                         latitude: 18.735693,
                         longitude: -70.162651,
@@ -47,9 +47,20 @@ function MapViewScreen(props) {
 }
 
 const styles = StyleSheet.create({
-    map: {
+    mapIos: {
         height: '100%'
-    }
+    },
+    containerIos: {
+
+    },
+
+    mapAndroid: {
+        height: '100%',
+    },
+
+    containerAndroid: {
+
+    },
 })
 
 export default MapViewScreen;

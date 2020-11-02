@@ -5,7 +5,7 @@
 <application>   
       <meta-data      
       android:name="com.google.android.geo.API_KEY"      
-      android:value="AIzaSyBccw2HQt-QocznbohwpqYxZfcfvmRfa_s"
+      android:value="AIzaSyA96bPJjAD9l3PCnhaaAI3h67vRldVVl2g"
       />
 </application>
 
