@@ -6,7 +6,7 @@ import { ListItem } from 'react-native-elements';
 import { FuelsItems } from '../molecules'
 
 function CardListPrices(props) {
-    console.log(props.fuelsProps)
+    // console.log(props.fuelsProps)
     return (
         <View>
             {
