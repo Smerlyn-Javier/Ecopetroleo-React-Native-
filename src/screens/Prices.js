@@ -3,6 +3,7 @@ import { View, Text, ScrollView, StyleSheet, } from 'react-native'
 
 // COMPONENTS
 import { CustomHeader, CardListPrices } from '../components/organisms'
+import { Custom_ActivityIndicator } from '../components/atoms'
 
 // STYLES
 import { Colors } from '../assets/styles'
@@ -12,7 +13,8 @@ import { fuelServices } from '../services'
 
 class Prices extends Component {
     state = {
-        fuels: []
+        fuels: [],
+        spinner:true
     };
     async componentDidMount() {
         const fuelsResponse = await new fuelServices().getFuels();
@@ -33,7 +35,7 @@ class Prices extends Component {
                             price: element[property],
                             coin: 'RD$',
                             color: '#061ba1',
-                            icon: true 
+                            icon: true
                         }
                         obj1.fuels.push(obj2);
                         break
@@ -108,12 +110,19 @@ class Prices extends Component {
 
         });
         this.setState({ fuels });
+
+        let spinner = false;
+
+        if(fuels.length !== 0 || setTimeout(()=>true,1000)){
+         this.setState({spinner})
+        }
     }
 
     render() {
         return (
             <View >
                 <CustomHeader name='Precios' context={this.props} />
+                <Custom_ActivityIndicator spinner={this.state.spinner}/>
                 <ScrollView style={styles.container}>
                     <CardListPrices fuelsProps={this.state.fuels} />
                 </ScrollView>
