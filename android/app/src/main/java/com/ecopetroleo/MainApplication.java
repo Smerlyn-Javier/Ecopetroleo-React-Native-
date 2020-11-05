@@ -11,10 +11,16 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import com.facebook.react.shell.MainReactPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import java.util.Arrays;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
+       
+      
         @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
@@ -26,8 +32,14 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+
+          // packages.add(new MainReactPackage());
+          // packages.add(new MapsPackage());
+
           return packages;
         }
+             
+
 
         @Override
         protected String getJSMainModuleName() {
@@ -39,6 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
+
+  
 
   @Override
   public void onCreate() {
