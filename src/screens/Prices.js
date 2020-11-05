@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, } from 'react-native'
+import { View, Text, ScrollView, StyleSheet,} from 'react-native'
 
 // COMPONENTS
 import { CustomHeader, CardListPrices } from '../components/organisms'
@@ -11,14 +11,21 @@ import { Colors } from '../assets/styles'
 // SERVICES
 import { fuelServices } from '../services'
 
+
+
 class Prices extends Component {
+
     state = {
         fuels: [],
-        spinner:true
+        spinner: true,
     };
     async componentDidMount() {
+        let spinner = false;
+        setTimeout(() => this.setState({ spinner }), 2000)
+
         const fuelsResponse = await new fuelServices().getFuels();
         let fuels = []
+
         fuelsResponse.forEach(element => {
 
             let obj1 = {
@@ -111,18 +118,14 @@ class Prices extends Component {
         });
         this.setState({ fuels });
 
-        let spinner = false;
-
-        if(fuels.length !== 0 || setTimeout(()=>true,1000)){
-         this.setState({spinner})
-        }
     }
+
 
     render() {
         return (
             <View >
                 <CustomHeader name='Precios' context={this.props} />
-                <Custom_ActivityIndicator spinner={this.state.spinner}/>
+                <Custom_ActivityIndicator spinner={this.state.spinner} />
                 <ScrollView style={styles.container}>
                     <CardListPrices fuelsProps={this.state.fuels} />
                 </ScrollView>
