@@ -1,8 +1,10 @@
 import React from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, Linking, TouchableOpacity } from 'react-native'
 
+import MapView, { Marker } from 'react-native-maps';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 function CardInfoStation(props) {
     if (props.type === 'SERVICES') {
@@ -11,10 +13,9 @@ function CardInfoStation(props) {
             <View style={styles.servicesContainer}>
                 <Text style={styles.titleServices}> SERVICIOS </Text>
                 <View style={styles.services}>{
-
-                    props.station.services.map((element, key) => (
-                        <View style={styles.servicesContent}>
-                            <Image style={styles.serviceImage} source={element.image} />
+                    (props.station.services || []).map((element, key) => (
+                        <View style={styles.servicesContent} key={key}>
+                            <Image style={styles.serviceImage} source={{ uri: element.image }} />
                             <Text style={styles.serviceName}>{element.name}</Text>
                         </View>
                     ))
@@ -26,25 +27,50 @@ function CardInfoStation(props) {
     else if (props.type === 'CONTACTS') {
         return (
 
-            <View style={styles.contactsContainer}>
+            <TouchableOpacity style={styles.contactsContainer} onPress={() => { Linking.openURL(`tel:${props.station.contact}`) }}>
                 <Icon name="phone" size={25} color='#5c5c5c' />
                 <View style={styles.textContactsContainer}>
                     <Text style={styles.contactTitle}>CONTACTENOS</Text>
                     <Text style={styles.phone}>{props.station.contact}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     else if (props.type === 'MAP') {
         return (
 
             <View style={styles.mapContainer}>
-                <Icon name="map-marker" size={25} color='#5c5c5c' />
-                <View style={styles.textmapContainer}>
-                    <Text style={styles.mapTitle}>UBICACIÓN</Text>
-                    <Text style={styles.direcction}>{props.station.direcction}</Text>
+                <View style={{display:'flex',flexDirection:'row', marginBottom:25}}>
+                    <Icon name="map-marker" size={25} color='#5c5c5c' />
+                    <View style={styles.textmapContainer}>
+                        <Text style={styles.mapTitle}>UBICACIÓN</Text>
+                        <Text style={styles.direcction}>{props.station.direcction}</Text>
+                    </View>
                 </View>
-            </View>
+                <View style={styles.contentMap}>
+
+                    <MapView
+                        style={styles.mapIos}
+                        zoomEnabled={false}
+                        showsUserLocation={true}
+                        initialRegion={{
+                            latitude: 18.735693,
+                            longitude: -70.162651,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+
+                        <Marker
+                            coordinate={{ latitude: 18.735693, longitude: -70.162651 }}
+                            title='SOY YO'
+                            image={require('../../assets/images/resources/Marker-icon.png')}
+                        />
+
+                    </MapView>
+
+                </View>
+            </View >
         )
     }
 
@@ -79,7 +105,7 @@ const styles = StyleSheet.create({
     services: {
         padding: 10,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         flexDirection: 'row',
     },
     serviceImage: {
@@ -87,11 +113,15 @@ const styles = StyleSheet.create({
         width: 30,
         marginVertical: 5,
         borderRadius: 50,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        marginHorizontal: 10
     },
     serviceName: {
+        textAlign: 'center',
         fontSize: 10,
-        color: '#2a2ea1'
+        color: '#2a2ea1',
+        marginHorizontal: 10,
+        width: 60,
     },
     servicesContent: {
         justifyContent: 'center',
@@ -122,12 +152,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     contactTitle: {
-        color:'#5c5c5c',
+        color: '#5c5c5c',
         fontSize: 12,
         fontWeight: '400'
     },
     phone: {
-        color:'#787878',
+        color: '#787878',
         fontSize: 10,
         fontWeight: '400'
     },
@@ -138,7 +168,7 @@ const styles = StyleSheet.create({
     mapContainer: {
         backgroundColor: 'white',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         padding: 15,
         marginBottom: 20,
 
@@ -158,16 +188,28 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     mapTitle: {
-        color:'#5c5c5c',
+        color: '#5c5c5c',
         fontSize: 12,
         fontWeight: '400'
     },
     direcction: {
-        color:'#787878',
+        color: '#787878',
         fontSize: 10,
         fontWeight: '400',
-        width:'90%'
-    }
+        width: '90%'
+    },
+    contentMap: {
+
+        height: 300,
+    },
+    mapIos: {
+        // flex:1,
+        height: 300,
+        width: '100%'
+    },
+    containerIos: {
+
+    },
 
 
 })

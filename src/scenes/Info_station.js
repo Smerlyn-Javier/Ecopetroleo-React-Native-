@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, ScrollView, StyleSheet, Image, RefreshControl } from 'react-native'
 
 
 
@@ -37,31 +37,77 @@ const data = {
     direcction: 'ANTIGUA CARRT. DUARTE NO.3, ESQ. LA PAZ, ENRIQUILLO. Km 9'
 }
 
-function InfoStation(props) {
-    return (
-        <View>
-            <CustomHeader name='Informacion de la estación' context={props} />
-            <ScrollView style={styles.container}>
-                <View style={styles.hero}>
-                    <Image style={styles.image} source={require('../assets/images/resources/horizontal-logo.png')} />
-                </View>
-                <View style={styles.content}>
-                    <View style={styles.header}>
-                        <Text style={styles.titleStation}>{data.name}</Text>
-                        <View style={styles.containerDistance}>
-                            <Text style={styles.KM}>{data.distance}</Text>
-                            <Text style={styles.distance}>Distancia</Text>
+// SERVICES
+import { stationsServices } from '../services'
+
+class InfoStation extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {},
+        }
+    }
+    async setStation(idStation) {
+        const stationResponse = await new stationsServices().getStation(Number(idStation));
+
+        let obj = {
+                    name: stationResponse.title,
+                    distance: '3.54 KM',
+                    services: [],
+                    contact: (stationResponse.acf || {}).telefono,
+                    direcction: (stationResponse.acf || {}).direccion,
+                    url:stationResponse.thumbnail
+                }
+        
+                if ((stationResponse.acf || {}).servicios_disponibles) {
+        
+                    (stationResponse.acf || {}).servicios_disponibles.forEach(element => {
+                        let obj1 = {
+                            image: element.imagen_servicio.url,
+                            name: element.nombre_servicio
+                        }
+                        obj.services.push(obj1)
+                    });
+                }
+
+                let data = obj;
+                this.setState({ data })
+    }
+
+    render() {
+
+        const { longitud, latitud, stationName, idStation } = this.props.route.params
+        this.setStation(idStation)
+
+        return (
+            <View>
+                <CustomHeader name={stationName} context={this.props} />
+
+                <ScrollView style={styles.container}>
+                    <View style={styles.hero}>
+                        <Image style={styles.image} source={{ uri: this.state.data.url }} />
+                        {/* <Image style={styles.image} source={require('../assets/images/resources/horizontal-logo.png')} /> */}
+                    </View>
+                    <View style={styles.content}>
+                        <View style={styles.header}>
+                            <Text style={styles.titleStation}>{stationName}</Text>
+                            <View style={styles.containerDistance}>
+                                <Text style={styles.KM}>{data.distance}</Text>
+                                <Text style={styles.distance}>Distancia</Text>
+                            </View>
+                        </View>
+                        <View style={styles.cards}>
+                            <CardInfoStation type='SERVICES' station={this.state.data} />
+                            <CardInfoStation type='CONTACTS' station={this.state.data} />
+                            <CardInfoStation type='MAP' station={this.state.data} />
                         </View>
                     </View>
-                    <View style={styles.cards}>
-                        <CardInfoStation type='SERVICES' station={data} />
-                        <CardInfoStation type='CONTACTS' station={data} />
-                        <CardInfoStation type='MAP' station={data} />
-                    </View>
-                </View>
-            </ScrollView>
-        </View>
-    )
+                </ScrollView>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -89,7 +135,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     image: {
-        height: 200,
+        height: 250,
         width: '100%',
         resizeMode: 'cover'
     },

@@ -124,15 +124,15 @@ class MapViewScreen extends Component {
     async componentDidMount() {
         const stationsResponse = await new stationsServices().getStations();
 
-        
+
 
         let stations = [];
         stationsResponse.forEach(element => {
-            let obj ={
+            let obj = {
                 id: element.id,
                 post_title: element.post_title,
-                latitud: Number(element.latitud.replace(',','')),
-                longitud: Number(element.longitud.replace(',','')),
+                latitud: Number(element.latitud.replace(',', '')),
+                longitud: Number(element.longitud.replace(',', '')),
                 direccion: element.direccion,
                 telefono: element.telefono
             }
@@ -140,8 +140,9 @@ class MapViewScreen extends Component {
         });
         this.setState({ stations })
     }
+
     render() {
-        console.log(this.state.stations)
+
 
         if (Platform.OS === 'ios') {
 
@@ -151,6 +152,12 @@ class MapViewScreen extends Component {
 
                     <MapView
                         style={styles.mapIos}
+                        showsUserLocation={true}
+                        followsUserLocation={true}
+                        showsMyLocationButton={true}
+                        showsTraffic={false}
+                        zoomControlEnabled={true}
+                        rotateEnabled={false}
                         initialRegion={{
                             latitude: 18.735693,
                             longitude: -70.162651,
@@ -166,7 +173,18 @@ class MapViewScreen extends Component {
                                     coordinate={{ latitude: element.latitud, longitude: element.longitud }}
                                     title={element.post_title}
                                     image={require('../assets/images/resources/Marker-icon-ios.png')}
-                                    onPress={() => { this.props.navigation.navigate('Info_station') }}
+                                    onPress={() => {
+                                        this.props.navigation.navigate('Info_station')
+                                        this.props.navigation.navigate(
+                                            'Info_station',
+                                            {
+                                                idStation: element.id,
+                                                longitud: element.latitud,
+                                                latitud: element.latitud,
+                                                stationName: element.post_title,
+                                            }
+                                        )
+                                    }}
                                 />
                             ))
                         }
@@ -187,6 +205,12 @@ class MapViewScreen extends Component {
                     <MapView
                         provider={PROVIDER_GOOGLE}
                         style={styles.mapAndroid}
+                        showsUserLocation={true}
+                        followsUserLocation={true}
+                        showsMyLocationButton={true}
+                        showsTraffic={false}
+                        zoomControlEnabled={true}
+                        rotateEnabled={false}
                         initialRegion={{
                             latitude: 18.735693,
                             longitude: -70.162651,
@@ -202,9 +226,20 @@ class MapViewScreen extends Component {
                                     coordinate={{ latitude: element.latitud, longitude: element.longitud }}
                                     title={element.post_title}
                                     image={require('../assets/images/resources/Marker-icon.png')}
-                                    onPress={() => { this.props.navigation.navigate('Info_station') }}
+                                    onPress={() => {
+                                        this.props.navigation.navigate(
+                                            'Info_station',
+                                            {
+                                                idStation: element.id,
+                                                longitud: element.latitud,
+                                                latitud: element.latitud,
+                                                stationName: element.post_title,
+                                            }
+                                        )
+                                        this.props.navigation.navigate('Info_station')
+                                    }}
                                 />
-                                
+
                             ))
                         }
                     </MapView>
