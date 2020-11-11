@@ -1,86 +1,104 @@
-import React, { useState } from 'react'
+import React, { Component, useState } from 'react'
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
-import { State } from 'react-native-gesture-handler';
+
 
 //STYLES 
 import { Colors } from '../assets/styles'
 
-
+// SERVICES
+import { registerServices } from '../services'
 // IMAGES
 const vertical_logo = require('../assets/images/resources/vertical-logo.png')
 
 
 
-function Sign_up(props) {
+class Sign_up extends Component {
 
-    let [Hide_or_Show, setHideShow] = useState(true);
-    const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
+    state={
+        username:'',
+        email:'',
+        displayname:'',
+        password:'',
+    }
 
-    return (
-        <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
-            <ScrollView>
-                <View style={styles.container}>
-                    <Image style={styles.image} source={vertical_logo} />
-                    <Text style={{ margin: 20, color: Colors.BLACK, fontWeight: 'bold' }}>CREA TU CUENTA</Text>
-                </View>
+    async userRegister(username,email,displayname,password){
+        const userRegisterResult = await new registerServices().userRegister(username,email,displayname,password)
+        console.log(userRegisterResult);
+    }
 
-                <View style={styles.inputContainer}>
-                    <Input
-                        placeholder='UserName'
-                        errorStyle={{ color: 'red' }}
-                        errorMessage=''
-                        inputStyle={styles.inputStyle}
-                    />
-                    <Input
-                        placeholder='Nombre'
-                        errorStyle={{ color: 'red' }}
-                        errorMessage=''
-                        inputStyle={styles.inputStyle}
-                    />
-                    <Input
-                        placeholder='Correo'
-                        errorStyle={{ color: 'red' }}
-                        errorMessage=''
-                        inputStyle={styles.inputStyle}
-                    />
+    render() {
 
-                    <Input
-                        placeholder="Contraseña"
-                        secureTextEntry={Hide_or_Show}
-                        inputStyle={styles.inputStyle}
-                        rightIcon={
-                            <TouchableOpacity onPress={onPress}>{
-                                Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
-                            }
-                            </TouchableOpacity>
-                        }
-                    />
+        // let [Hide_or_Show, setHideShow] = useState(true);
+        // const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
+        return (
+            <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Image style={styles.image} source={vertical_logo} />
+                        <Text style={{ margin: 20, color: Colors.BLACK, fontWeight: 'bold' }}>CREA TU CUENTA</Text>
+                    </View>
 
-                    <TouchableOpacity style={styles.button1}
-                        onPress={() => {
-                            alert('You tapped the button!');
-                        }} >
-                        <Text style={styles.button1_text}>Registrarme</Text>
-                    </TouchableOpacity>
+                    <View style={styles.inputContainer}>
+                        <Input
+                            placeholder='UserName'
+                            errorStyle={{ color: 'red' }}
+                            errorMessage=''
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(username) => { this.setState({ username }) }}
+                        />
+                        <Input
+                            placeholder='Nombre'
+                            errorStyle={{ color: 'red' }}
+                            errorMessage=''
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(displayname) => { this.setState({ displayname }) }}
+                        />
+                        <Input
+                            placeholder='Correo'
+                            errorStyle={{ color: 'red' }}
+                            errorMessage=''
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(email) => { this.setState({ email }) }}
+                        />
+
+                        <Input
+                            placeholder="Contraseña"
+                            // secureTextEntry={Hide_or_Show}
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(password) => { this.setState({ password }) }}
+                        // rightIcon={
+                        //     <TouchableOpacity onPress={onPress}>{
+                        //         Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
+                        //     }
+                        //     </TouchableOpacity>
+                        // }
+                        />
+
+                        <TouchableOpacity style={styles.button1}
+                            onPress={() => {
+                                this.userRegister(this.state.username, this.state.email, this.state.displayname, this.state.password)
+                            }} >
+                            <Text style={styles.button1_text}>Registrarme</Text>
+                        </TouchableOpacity>
 
 
 
-                    <Text style={styles.errorText}>*Error</Text>
+                        {/* <Text style={styles.errorText}>*Error</Text> */}
 
-                    <TouchableOpacity onPress={() => {props.navigation.navigate('Log_in')}}>
-                        <Text style={styles.haveAcount}>Ya tengo una cuenta</Text>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity onPress={() => { this.props.navigation.navigate('Log_in') }}>
+                            <Text style={styles.haveAcount}>Ya tengo una cuenta</Text>
+                        </TouchableOpacity>
+                    </View>
 
 
 
-            </ScrollView>
+                </ScrollView>
 
-        </SafeAreaView>
-    )
+            </SafeAreaView>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
