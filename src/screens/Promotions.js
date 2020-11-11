@@ -13,7 +13,7 @@ function wait(timeout) {
   }
 
 function Promotions(props) {
-
+    
 
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -22,10 +22,6 @@ function Promotions(props) {
 
         wait(2000).then(() => setRefreshing(false));
     }, [refreshing]);
-
-
-
-
 
     return (
         <View style={styles.container}>

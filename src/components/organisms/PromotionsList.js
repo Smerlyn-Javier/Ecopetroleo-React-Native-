@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import { ListItem } from 'react-native-elements'
@@ -6,34 +6,46 @@ import { ListItem } from 'react-native-elements'
 // MOLECULES
 import { Items } from '../molecules'
 
+// SERVICES
+import { promotionsEventsServices } from '../../services'
 
-const data = [
-    {
-        title: 'Titulo de la promo',
-        description: 'Descripcion de la promo',
-        testImage: require('../../assets/images/resources/Test.png'),
-    },
-    {
-        title: 'Titulo de la promo',
-        description: 'Descripcion de la promo',
-        testImage: require('../../assets/images/resources/Test.png'),
-    },
-]
+class PromotionsList extends Component {
 
-function PromotionsList(props) {
-    return (
-        <View>
-            {
-                data.map((element, key) => (
-                    <ListItem key={key} bottomDivider={true} onPress={() => { props.context.navigation.navigate('Info_promotions') }}>
-                        <ListItem.Content>
-                            <Items type='PROMOTIONS' image={element.testImage} title={element.title} description={element.description} />
-                        </ListItem.Content>
-                    </ListItem>
-                ))
-            }
-        </View>
-    )
+    state = {
+        promotionsEventsList:[]
+    }
+    async componentDidMount(){
+        const promotionsEventsResult = await new promotionsEventsServices().getPromotionsEvents();
+        console.log(promotionsEventsResult)
+        let promotionsEventsList = promotionsEventsResult;
+        this.setState({promotionsEventsList})
+    }
+    render() {
+        return (
+
+            <View>
+                {
+                    this.state.promotionsEventsList.map((element, key) => (
+                        <ListItem key={key} bottomDivider={true} onPress={() => { 
+                            this.props.context.navigation.navigate('Info_promotions')
+                            this.props.context.navigation.navigate(
+                                'Info_promotions',
+                                {
+                                    idPromotionEvent: element.id
+                                }
+                                )
+                             }}>
+                            <ListItem.Content>
+                                <Items type='PROMOTIONS' image={element.thumbnail} title={element.title} description={element.content} />
+                            </ListItem.Content>
+                        </ListItem>
+                    ))
+                }
+            </View>
+        )
+
+    }
+
 }
 
 export default PromotionsList;

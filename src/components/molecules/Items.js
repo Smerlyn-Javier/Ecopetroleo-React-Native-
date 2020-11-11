@@ -10,7 +10,7 @@ function Items(props) {
             <View style={styles.promotionItemContainer}>
 
                 <View style={styles.promotionsImage}>
-                    <Image style={styles.promoImage} source={props.image} />
+                    <Image style={styles.promoImage} source={{uri:props.image}} />
                 </View>
 
                 <View style={styles.promotionsDescription}>
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
     promotionItemContainer: {
         display:'flex',
         flexDirection:'row',
+        width:'100%',
+        paddingRight:100
     },
     promoImage:{
         height:100,
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     },
     promotionsDescription:{
       paddingHorizontal:10,
+      width:'100%'
       
     },
     promoTitle:{
