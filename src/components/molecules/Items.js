@@ -26,7 +26,7 @@ function Items(props) {
             <View style={styles.tipsItemContainer}>
 
             <View style={styles.tipsImage}>
-                <Image style={styles.tipsImage} source={props.image} />
+                <Image style={styles.tipsImage} source={{uri:props.image}} />
             </View>
 
             <View style={styles.tipsDescriptionContainer}>

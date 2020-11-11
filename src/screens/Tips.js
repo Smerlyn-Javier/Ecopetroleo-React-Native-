@@ -6,6 +6,8 @@ import { View, Text, StyleSheet, RefreshControl, ScrollView } from 'react-native
 import { CustomHeader,TipsList } from '../components/organisms'
 
 
+
+
 function wait(timeout) {
     return new Promise(resolve => {
       setTimeout(resolve, timeout);
