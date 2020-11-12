@@ -77,6 +77,7 @@ class MapViewScreen extends Component {
                         style={styles.mapIos}
                         // showsUserLocation={true}
                         // followsUserLocation={true}
+                        minZoomLevel={8}
                         showsMyLocationButton={true}
                         showsTraffic={false}
                         zoomControlEnabled={true}
@@ -137,6 +138,7 @@ class MapViewScreen extends Component {
                         // followsUserLocation={true}
                         showsMyLocationButton={true}
                         // showsTraffic={false}
+                        minZoomLevel={8}
                         zoomControlEnabled={true}
                         rotateEnabled={false}
                         showsUserLocation={true}
