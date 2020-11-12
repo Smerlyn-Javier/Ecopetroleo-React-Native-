@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Component, useState } from 'react'
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
 import { Input } from 'react-native-elements';
@@ -7,63 +7,82 @@ import { Input } from 'react-native-elements';
 //STYLES 
 import { Colors } from '../assets/styles'
 
+// SERVICES
+import { recoveryServices } from '../services'
 
 // IMAGES
 const vertical_logo = require('../assets/images/resources/vertical-logo.png')
 
 
 
-function Password_recovery(props) {
+class Password_recovery extends Component {
 
-    let [Hide_or_Show, setHideShow] = useState(true);
-    const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            username: '',
+            recoveryResponse:'',
+        }
+    }
 
-    return (
-        <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
-            <ScrollView>
-                <View style={styles.container}>
-                    <Image style={styles.image} source={vertical_logo} />
-                    <Text style={{ margin: 20, color: Colors.BLACK, fontWeight: 'bold' }}>RECUPERA TU CONTRASEÑA</Text>
-                </View>
+    async recoveryPassword(username){
+        const recoveryPasswordResult = await new recoveryServices().recoveryPassword(username)
+        this.setState({recoveryResponse:recoveryPasswordResult})
+    }
 
-                <View style={styles.inputContainer}>
-                    <Input
-                        placeholder='UserName'
-                        errorStyle={{ color: 'red' }}
-                        errorMessage=''
-                        inputStyle={styles.inputStyle}
-                    />
+    render() {
 
-                    <TouchableOpacity style={styles.button1}
-                        onPress={() => {
-                            alert('You tapped the button!');
-                        }} >
-                        <Text style={styles.button1_text}>Recuperar mi contraseña</Text>
-                    </TouchableOpacity>
-
-
-
-                    <Text style={styles.errorText}>*Error</Text>
-
-                    <View style={styles.labels}>
-                        
-                    <TouchableOpacity onPress={() => {props.navigation.navigate('Log_in')}}>
-                        <Text style={styles.haveAcount}>Ingresar</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => {props.navigation.navigate('Sign_up')}}>
-                        <Text style={styles.haveAcount}>Registrate</Text>
-                    </TouchableOpacity>
+        return (
+            <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Image style={styles.image} source={vertical_logo} />
+                        <Text style={{ margin: 20, color: Colors.BLACK, fontWeight: 'bold' }}>RECUPERA TU CONTRASEÑA</Text>
                     </View>
 
-                </View>
+                    <View style={styles.inputContainer}>
+                        <Input
+                            placeholder='UserName'
+                            errorStyle={{ color: 'red' }}
+                            errorMessage=''
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(username) => { this.setState({ username }) }}
+                        />
+
+                        <TouchableOpacity style={styles.button1}
+                            onPress={() => {
+                                this.recoveryPassword(this.state.username);
+                            }} >
+                            <Text style={styles.button1_text}>Recuperar mi contraseña</Text>
+                        </TouchableOpacity>
 
 
 
-            </ScrollView>
+                        {/* <Text style={styles.errorText}>{this.state.recoveryResponse}</Text> */}
+                        <Text style={styles.responseText}>{this.state.recoveryResponse}</Text>
 
-        </SafeAreaView>
-    )
+                        <View style={styles.labels}>
+
+                            <TouchableOpacity onPress={() => { props.navigation.navigate('Log_in') }}>
+                                <Text style={styles.haveAcount}>Ingresar</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => { props.navigation.navigate('Sign_up') }}>
+                                <Text style={styles.haveAcount}>Registrate</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+
+
+
+                </ScrollView>
+
+            </SafeAreaView>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
@@ -110,17 +129,22 @@ const styles = StyleSheet.create({
         marginTop: 15,
         textAlign: 'center',
     },
+    responseText:{
+        color: Colors.GREEN_LIGHT,
+        marginTop: 15,
+        textAlign: 'center',
+    },
     haveAcount: {
         marginTop: 15,
         textAlign: 'center',
         fontWeight: 'bold',
         color: Colors.BLUE_LIGHT,
     },
-    labels:{
-        marginTop:10,
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'space-between',
+    labels: {
+        marginTop: 10,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 })
 
