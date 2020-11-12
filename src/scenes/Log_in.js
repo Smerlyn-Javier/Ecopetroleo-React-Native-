@@ -1,82 +1,124 @@
-import React, { useState } from 'react'
+import React, { Component, useState } from 'react'
 import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { Input } from 'react-native-elements';
-import { State } from 'react-native-gesture-handler';
+
 
 //STYLES 
 import { Colors } from '../assets/styles'
 
+// SERVICES
+import { loginServices } from '../services'
 
 // IMAGES
 const vertical_logo = require('../assets/images/resources/vertical-logo.png')
 
 
 
-function Log_in(props) {
+class Log_in extends Component {
 
-    let [Hide_or_Show, setHideShow] = useState(true);
-    const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
+    constructor(props) {
+        super(props);
+        this.onPressHide_or_Show = this.onPressHide_or_Show.bind(this);
+        this.state = {
+            username: '',
+            password: '',
+            loginResponse: '',
+            Hide_or_Show: true,
+        }
+    }
 
-    return (
-        <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
-            <ScrollView>
-                <View style={styles.container}>
-                    <Image style={styles.image} source={vertical_logo} />
-                </View>
+    async login(username, password) {
+        const loginResponse = await new loginServices().userLogin(username, password);
+        this.setState({ loginResponse })
+    }
 
-                <View style={styles.inputContainer}>
-                    <Input
-                        placeholder='UserName'
-                        errorStyle={{ color: 'red' }}
-                        errorMessage=''
-                        inputStyle={styles.inputStyle}
-                    />
+     onPressHide_or_Show() {
 
-                    <Input
-                        placeholder="Contraseña"
-                        secureTextEntry={Hide_or_Show}
-                        inputStyle={styles.inputStyle}
-                        rightIcon={
-                            <TouchableOpacity onPress={onPress}>{
-                                Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
-                            }
-                            </TouchableOpacity>
-                        }
-                    />
+        if (this.state.Hide_or_Show) {
+            var Hide_or_Show = false
+            this.setState({ Hide_or_Show })
+        }
+        else {
+            var Hide_or_Show = true
+            this.setState({ Hide_or_Show })
+        }
 
-                    <TouchableOpacity style={styles.button1}
-                        onPress={() => {
-                            alert('You tapped the button!');
-                            props.navigation.navigate('MapViewScreen')
-                        }} >
-                        <Text style={styles.button1_text}>Ingresar</Text>
-                    </TouchableOpacity>
+    }
 
-
-
-                    <Text style={styles.errorText}>*Error</Text>
-
-                    <View style={styles.labels}>
-                        
-                    <TouchableOpacity onPress={() => {props.navigation.navigate('Password_recovery')}}>
-                        <Text style={styles.haveAcount}>¿Olvidante tu contraseña?</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => {props.navigation.navigate('Sign_up')}}>
-                        <Text style={styles.haveAcount}>Registrate</Text>
-                    </TouchableOpacity>
+    render() {
+        return (
+            <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Image style={styles.image} source={vertical_logo} />
                     </View>
 
-                </View>
+                    <View style={styles.inputContainer}>
+                        <Input
+                            placeholder='UserName'
+                            errorStyle={{ color: 'red' }}
+                            errorMessage=''
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(username) => { this.setState({ username }) }}
+                        />
+
+                        <Input
+                            placeholder="Contraseña"
+                            secureTextEntry={this.state.Hide_or_Show}
+                            inputStyle={styles.inputStyle}
+                            onChangeText={(password) => { this.setState({ password }) }}
+                            rightIcon={
+                                <TouchableOpacity onPress={this.onPressHide_or_Show}>{
+                                    this.state.Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
+                                }
+                                </TouchableOpacity>
+                            }
+                        />
+
+                        <TouchableOpacity style={styles.button1}
+                            onPress={() => {
+                                this.login(this.state.username, this.state.password)
+                                setTimeout(() => {
+
+                                    if (this.state.loginResponse == 'ok') {
+                                        alert('Bienvenido.')
+                                        this.props.navigation.navigate('MapViewScreen')
+                                    }
+                                    else {
+                                        alert('Datos invalidos.')
+                                    }
+                                }, 5000)
+
+                            }} >
+                            <Text style={styles.button1_text}>Ingresar</Text>
+                        </TouchableOpacity>
 
 
 
-            </ScrollView>
+                        {/* <Text style={styles.errorText}>*Error</Text> */}
 
-        </SafeAreaView>
-    )
+                        <View style={styles.labels}>
+
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Password_recovery') }}>
+                                <Text style={styles.haveAcount}>¿Olvidante tu contraseña?</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Sign_up') }}>
+                                <Text style={styles.haveAcount}>Registrate</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+
+
+
+                </ScrollView>
+
+            </SafeAreaView >
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -129,11 +171,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.BLUE_LIGHT,
     },
-    labels:{
-        marginTop:10,
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'space-between',
+    labels: {
+        marginTop: 10,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 })
 

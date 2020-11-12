@@ -16,22 +16,38 @@ const vertical_logo = require('../assets/images/resources/vertical-logo.png')
 
 class Sign_up extends Component {
 
-    state={
-        username:'',
-        email:'',
-        displayname:'',
-        password:'',
+    constructor(props) {
+        super(props);
+        this.onPressHide_or_Show = this.onPressHide_or_Show.bind(this);
+        this.state = {
+            username: '',
+            email: '',
+            displayname: '',
+            password: '',
+            Hide_or_Show: true,
+        }
     }
 
-    async userRegister(username,email,displayname,password){
-        const userRegisterResult = await new registerServices().userRegister(username,email,displayname,password)
+    async userRegister(username, email, displayname, password) {
+        const userRegisterResult = await new registerServices().userRegister(username, email, displayname, password)
         console.log(userRegisterResult);
+    }
+
+    onPressHide_or_Show() {
+
+        if (this.state.Hide_or_Show) {
+            var Hide_or_Show = false
+            this.setState({ Hide_or_Show })
+        }
+        else {
+            var Hide_or_Show = true
+            this.setState({ Hide_or_Show })
+        }
+
     }
 
     render() {
 
-        // let [Hide_or_Show, setHideShow] = useState(true);
-        // const onPress = () => setHideShow(prevHS => prevHS = !prevHS);
         return (
             <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
                 <ScrollView>
@@ -65,15 +81,15 @@ class Sign_up extends Component {
 
                         <Input
                             placeholder="Contraseña"
-                            // secureTextEntry={Hide_or_Show}
+                            secureTextEntry={this.state.Hide_or_Show}
                             inputStyle={styles.inputStyle}
                             onChangeText={(password) => { this.setState({ password }) }}
-                        // rightIcon={
-                        //     <TouchableOpacity onPress={onPress}>{
-                        //         Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
-                        //     }
-                        //     </TouchableOpacity>
-                        // }
+                            rightIcon={
+                                <TouchableOpacity onPress={this.onPressHide_or_Show}>{
+                                    this.state.Hide_or_Show == true ? <Text style={styles.textColor}>SHOW</Text> : <Text style={styles.textColor}>HIDE</Text>
+                                }
+                                </TouchableOpacity>
+                            }
                         />
 
                         <TouchableOpacity style={styles.button1}
