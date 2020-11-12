@@ -64,11 +64,11 @@ class Password_recovery extends Component {
 
                         <View style={styles.labels}>
 
-                            <TouchableOpacity onPress={() => { props.navigation.navigate('Log_in') }}>
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Log_in') }}>
                                 <Text style={styles.haveAcount}>Ingresar</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => { props.navigation.navigate('Sign_up') }}>
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Sign_up') }}>
                                 <Text style={styles.haveAcount}>Registrate</Text>
                             </TouchableOpacity>
                         </View>
