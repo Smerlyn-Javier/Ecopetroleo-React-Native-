@@ -31,7 +31,7 @@ function Items(props) {
 
             <View style={styles.tipsDescriptionContainer}>
                 <Text style={styles.tipsTitle}>{props.title}</Text>
-                <Text style={styles.tipsDescription}>{props.description}</Text>
+                <Text style={styles.tipsDescription}>{String(props.description).replace('<p>','').replace('</p>','')}</Text>
             </View>
 
         </View>

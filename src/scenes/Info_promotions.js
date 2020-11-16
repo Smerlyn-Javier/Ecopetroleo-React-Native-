@@ -38,7 +38,7 @@ class InfoPromotions extends Component {
                     <View style={styles.promotionInfoContainer}>
                         <Text style={styles.title}>{this.state.data.title}</Text>
                         <Text style={styles.creator}>Publicado ayer por admin</Text>
-                        <Text style={styles.description}>{this.state.data.content}</Text>
+                        <Text style={styles.description}>{String(this.state.data.content).replace('<p>','').replace('</p>','')}</Text>
                     </View>
                 </ScrollView>
             </View>
