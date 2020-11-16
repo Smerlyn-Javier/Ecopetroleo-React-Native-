@@ -36,7 +36,6 @@ function First_screen(props) {
 
                     <TouchableOpacity style={styles.button1}
                         onPress={() => {
-                            alert('You tapped the button!');
                             props.navigation.navigate('Log_in')
                         }} >
                         <Text style={styles.button1_text}>Iniciar sesión</Text>
@@ -46,7 +45,6 @@ function First_screen(props) {
 
                     <TouchableOpacity style={styles.button2}
                         onPress={() => {
-                            alert('You tapped the button!');
                             props.navigation.navigate('Sign_up')
                         }} >
                         <Text style={styles.button2_text}>Registrarme</Text>
