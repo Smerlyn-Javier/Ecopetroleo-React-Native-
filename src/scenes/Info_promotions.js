@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     promotionInfoContainer: {
         // backgroundColor:'red',
         marginHorizontal: 15,
-        padding: 10
+        padding: 10,
+        marginBottom:50
     },
     title: {
         fontSize: 18,
