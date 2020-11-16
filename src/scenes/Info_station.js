@@ -51,14 +51,17 @@ class InfoStation extends Component {
     }
     async setStation(idStation) {
         const stationResponse = await new stationsServices().getStation(Number(idStation));
-
+        //  console.log(stationResponse)
         let obj = {
                     name: stationResponse.title,
                     distance: '3.54 KM',
                     services: [],
                     contact: (stationResponse.acf || {}).telefono,
                     direcction: (stationResponse.acf || {}).direccion,
-                    url:stationResponse.thumbnail
+                    url:stationResponse.thumbnail,
+                    longitude:Number(stationResponse.acf.lng) ,
+                    latitude:Number(stationResponse.acf.lat) ,
+
                 }
         
                 if ((stationResponse.acf || {}).servicios_disponibles) {
@@ -93,10 +96,10 @@ class InfoStation extends Component {
                     <View style={styles.content}>
                         <View style={styles.header}>
                             <Text style={styles.titleStation}>{stationName}</Text>
-                            <View style={styles.containerDistance}>
+                            {/* <View style={styles.containerDistance}>
                                 <Text style={styles.KM}>{data.distance}</Text>
                                 <Text style={styles.distance}>Distancia</Text>
-                            </View>
+                            </View> */}
                         </View>
                         <View style={styles.cards}>
                             <CardInfoStation type='SERVICES' station={this.state.data} />
