@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, Image, RefreshControl } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, RefreshControl,TouchableOpacity } from 'react-native'
 
-
+import openMap from 'react-native-open-maps';
 
 // COMPONENTS
 import { CustomHeader, CardInfoStation } from '../components/organisms'
@@ -79,6 +79,10 @@ class InfoStation extends Component {
                 this.setState({ data })
     }
 
+    goToMap(){
+        openMap({ latitude: this.state.data.latitude, longitude: this.state.data.longitude })
+    }
+
     render() {
 
         const { longitud, latitud, stationName, idStation } = this.props.route.params
@@ -96,6 +100,9 @@ class InfoStation extends Component {
                     <View style={styles.content}>
                         <View style={styles.header}>
                             <Text style={styles.titleStation}>{stationName}</Text>
+                            <TouchableOpacity style={styles.ir} onPress = {() => this.goToMap()}>
+                               <Text style={styles.irText}>Ir al mapa</Text>
+                            </TouchableOpacity>
                             {/* <View style={styles.containerDistance}>
                                 <Text style={styles.KM}>{data.distance}</Text>
                                 <Text style={styles.distance}>Distancia</Text>
@@ -174,6 +181,17 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'white',
         fontWeight: '400'
+    },
+
+    ir:{
+        backgroundColor:Colors.BLUE_LIGHT,
+        borderRadius:30,
+        padding:10
+    },
+    irText:{
+        fontSize:10,
+        fontWeight:'bold',
+         color:Colors.WHITE
     }
 })
 export default InfoStation;
