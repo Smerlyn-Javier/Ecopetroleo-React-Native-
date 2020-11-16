@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         resizeMode:'cover',
-        height: 500,
+        height: 300,
     },
     promotionInfoContainer: {
         // backgroundColor:'red',
