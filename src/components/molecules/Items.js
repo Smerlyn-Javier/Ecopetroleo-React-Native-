@@ -44,6 +44,15 @@ function Items(props) {
             </View>
         )
     }
+    else if (props.type === 'STATIONS') {
+        return (
+            <View>
+                <Text style={styles.ecoTitle}>{props.title}</Text>
+                <Text style={styles.ecoDirecction}>{props.direcction}</Text>
+                <Text style={styles.ecoPhone}>{props.phone}</Text>
+            </View>
+        )
+    }
     else {
         return (
             <View>
@@ -104,5 +113,20 @@ const styles = StyleSheet.create({
      fontSize:12,
      fontWeight:'200'
     },
+
+    // STATIONS
+    ecoTitle:{
+        fontWeight:'bold',
+        fontSize:16,
+        color:Colors.BLUE_LIGHT
+    },
+    ecoDirecction:{
+        fontSize:14,
+        color:Colors.BLACK
+    },
+    ecoPhone:{
+        fontSize:12,
+        color:Colors.BLACK
+    }
 })
 export default Items;

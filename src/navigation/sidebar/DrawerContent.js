@@ -96,16 +96,16 @@ function DrawerContent(props) {
                                 onPress={() => { props.navigation.navigate('Contacts') }}
                             />
 
-                            {/* <DrawerItem
+                            <DrawerItem
                                 icon={({ color, size }) => (
                                     <Icon
-                                        name="tools" size={size} color={color}
+                                        name="magnify" size={size} color={color}
                                     />
                                 )}
-                                label="CONFIGURACIÓN"
+                                label="BUSCAR ESTACIÓN"
                                 labelStyle={styles.labelStyle}
-                                onPress={() => { props.navigation.navigate('First_screen') }}
-                            /> */}
+                                onPress={() => { props.navigation.navigate('Search_station') }}
+                            />
 
 
 
