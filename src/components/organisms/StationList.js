@@ -44,7 +44,7 @@ class StationList extends Component {
                             'Info_station',
                             {
                                 idStation: element.id,
-                                longitud: element.latitud,
+                                longitud: element.longitud,
                                 latitud: element.latitud,
                                 stationName: element.post_title,
                             }

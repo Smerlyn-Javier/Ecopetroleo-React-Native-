@@ -43,7 +43,6 @@ class MapViewScreen extends Component {
 
         this.setState({ stations })
 
-
         GetLocation.getCurrentPosition({
             enableHighAccuracy: true,
             timeout: 15000,
@@ -66,7 +65,6 @@ class MapViewScreen extends Component {
 
 
     render() {
-
         // this.componentDidMount();
         if (Platform.OS === 'ios') {
 
@@ -104,12 +102,11 @@ class MapViewScreen extends Component {
                                     title={element.post_title}
                                     image={require('../assets/images/resources/Marker-icon-ios.png')}
                                     onPress={() => {
-                                        this.props.navigation.navigate('Info_station')
                                         this.props.navigation.navigate(
                                             'Info_station',
                                             {
                                                 idStation: element.id,
-                                                longitud: element.latitud,
+                                                longitud: element.longitud,
                                                 latitud: element.latitud,
                                                 stationName: element.post_title,
                                             }

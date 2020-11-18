@@ -1,41 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, StyleSheet, Image, RefreshControl,TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, RefreshControl, TouchableOpacity, Linking } from 'react-native'
 
-import openMap from 'react-native-open-maps';
+import openMap, { createOpenLink } from 'react-native-open-maps';
 
 // COMPONENTS
 import { CustomHeader, CardInfoStation } from '../components/organisms'
 
 // STYLES
 import { Colors } from '../assets/styles'
-
-
-
-// DATA
-const data = {
-    name: 'ECO HERRERA',
-    distance: '3.54 KM',
-    services: [
-        {
-            image: require('../assets/images/resources/Test.png'),
-            name: 'Food Shop'
-        },
-        {
-            image: require('../assets/images/resources/Test.png'),
-            name: 'Food Shop'
-        },
-        {
-            image: require('../assets/images/resources/Test.png'),
-            name: 'Food Shop'
-        },
-        {
-            image: require('../assets/images/resources/Test.png'),
-            name: 'Food Shop'
-        }
-    ],
-    contact: '809-548-8181',
-    direcction: 'ANTIGUA CARRT. DUARTE NO.3, ESQ. LA PAZ, ENRIQUILLO. Km 9'
-}
 
 // SERVICES
 import { stationsServices } from '../services'
@@ -53,34 +25,36 @@ class InfoStation extends Component {
         const stationResponse = await new stationsServices().getStation(Number(idStation));
         //  console.log(stationResponse)
         let obj = {
-                    name: stationResponse.title,
-                    distance: '3.54 KM',
-                    services: [],
-                    contact: (stationResponse.acf || {}).telefono,
-                    direcction: (stationResponse.acf || {}).direccion,
-                    url:stationResponse.thumbnail,
-                    longitude:Number(stationResponse.acf.lng) ,
-                    latitude:Number(stationResponse.acf.lat) ,
+            name: stationResponse.title,
+            distance: '3.54 KM',
+            services: [],
+            contact: (stationResponse.acf || {}).telefono,
+            direcction: (stationResponse.acf || {}).direccion,
+            url: stationResponse.thumbnail,
+            longitude: Number(stationResponse.acf.lng),
+            latitude: Number(stationResponse.acf.lat),
 
-                }
-        
-                if ((stationResponse.acf || {}).servicios_disponibles) {
-        
-                    (stationResponse.acf || {}).servicios_disponibles.forEach(element => {
-                        let obj1 = {
-                            image: element.imagen_servicio.url,
-                            name: element.nombre_servicio
-                        }
-                        obj.services.push(obj1)
-                    });
-                }
+        }
 
-                let data = obj;
-                this.setState({ data })
+        if ((stationResponse.acf || {}).servicios_disponibles) {
+
+            (stationResponse.acf || {}).servicios_disponibles.forEach(element => {
+                let obj1 = {
+                    image: element.imagen_servicio.url,
+                    name: element.nombre_servicio
+                }
+                obj.services.push(obj1)
+            });
+        }
+
+        let data = obj;
+        this.setState({ data })
     }
 
-    goToMap(){
-        openMap({ latitude: this.state.data.latitude, longitude: this.state.data.longitude })
+    goToMap() {
+        const station = { latitude: this.state.data.latitude, longitude: this.state.data.longitude };
+        const openStation = createOpenLink(station);
+        openStation()
     }
 
     render() {
@@ -95,13 +69,13 @@ class InfoStation extends Component {
                 <ScrollView style={styles.container}>
                     <View style={styles.hero}>
                         <Image style={styles.image} source={{ uri: this.state.data.url }} />
-                        {/* <Image style={styles.image} source={require('../assets/images/resources/horizontal-logo.png')} /> */}
                     </View>
                     <View style={styles.content}>
                         <View style={styles.header}>
                             <Text style={styles.titleStation}>{stationName}</Text>
-                            <TouchableOpacity style={styles.ir} onPress = {() => this.goToMap()}>
-                               <Text style={styles.irText}>Ir al mapa</Text>
+                            <TouchableOpacity style={styles.ir} onPress={() => Linking.openURL(`https://maps.apple.com/?q=${stationName}&ll=${this.state.data.latitude},${this.state.data.longitude}`)}>
+
+                                <Text style={styles.irText}>Ir al mapa</Text>
                             </TouchableOpacity>
                             {/* <View style={styles.containerDistance}>
                                 <Text style={styles.KM}>{data.distance}</Text>
@@ -183,15 +157,15 @@ const styles = StyleSheet.create({
         fontWeight: '400'
     },
 
-    ir:{
-        backgroundColor:Colors.BLUE_LIGHT,
-        borderRadius:30,
-        padding:10
+    ir: {
+        backgroundColor: Colors.BLUE_LIGHT,
+        borderRadius: 30,
+        padding: 10
     },
-    irText:{
-        fontSize:10,
-        fontWeight:'bold',
-         color:Colors.WHITE
+    irText: {
+        fontSize: 10,
+        fontWeight: 'bold',
+        color: Colors.WHITE
     }
 })
 export default InfoStation;
