@@ -37,7 +37,7 @@ class SearchStation extends Component {
                 />
 
                 <ScrollView>
-                    <StationList word={this.state.search} />
+                    <StationList word={this.state.search} context={this} />
                 </ScrollView>
             </View>
         )

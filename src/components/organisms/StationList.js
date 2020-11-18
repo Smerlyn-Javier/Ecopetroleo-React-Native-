@@ -39,7 +39,17 @@ class StationList extends Component {
             <View>
                 {
                     this.state.dataResult.map((element, key) => (
-                        <ListItem key={key} bottomDivider={true} onPress={(event) => { console.log(event) }}>
+                        <ListItem key={key} bottomDivider={true} onPress={() => { 
+                            this.props.context.props.navigation.navigate(
+                            'Info_station',
+                            {
+                                idStation: element.id,
+                                longitud: element.latitud,
+                                latitud: element.latitud,
+                                stationName: element.post_title,
+                            }
+                        ) 
+                        }}>
                             <ListItem.Content>
                                 <Items type='STATIONS' title={element.post_title} direcction={element.direccion} phone={element.telefono} />
                             </ListItem.Content>
