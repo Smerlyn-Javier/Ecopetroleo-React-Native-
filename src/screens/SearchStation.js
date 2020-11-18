@@ -13,6 +13,13 @@ class SearchStation extends Component {
     state = {
         data: [],
         search: '',
+        showLoading:true
+    }
+
+    componentDidMount(){
+        setTimeout(()=>{
+            this.setState({showLoading:false})
+        },5000)
     }
 
     render() {
@@ -39,6 +46,10 @@ class SearchStation extends Component {
                 <ScrollView>
                     <StationList word={this.state.search} context={this} />
                 </ScrollView>
+
+                {
+                    this.state.showLoading == true ? <Text style={{ color: 'grey', textAlign: 'center', marginBottom: 10 }}>Cargando...</Text> : <Text></Text>
+                }
             </View>
         )
     }

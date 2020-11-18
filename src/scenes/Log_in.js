@@ -26,6 +26,7 @@ class Log_in extends Component {
             password: '',
             loginResponse: '',
             Hide_or_Show: true,
+            showLoading:false,
         }
     }
 
@@ -56,6 +57,7 @@ class Log_in extends Component {
                     </View>
 
                     <View style={styles.inputContainer}>
+                        
                         <Input
                             placeholder='UserName'
                             errorStyle={{ color: 'red' }}
@@ -77,16 +79,21 @@ class Log_in extends Component {
                             }
                         />
 
+                        {
+                        this.state.showLoading == true ? <Text style={{color:'grey', textAlign:'center', marginBottom:10}}>Cargando...</Text> : <Text></Text>
+                        }
+
                         <TouchableOpacity style={styles.button1}
                             onPress={() => {
                                 this.login(this.state.username, this.state.password)
+                                this.setState({showLoading:true})
                                 setTimeout(() => {
 
                                     if (this.state.loginResponse == 'ok') {
-                                        alert('Bienvenido.')
                                         this.props.navigation.navigate('MapViewScreen')
                                     }
                                     else {
+                                        this.setState({showLoading:false})
                                         alert('Datos invalidos.')
                                     }
                                 }, 5000)
