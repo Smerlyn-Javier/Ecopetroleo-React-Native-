@@ -109,11 +109,11 @@ class Log_in extends Component {
                         <View style={styles.labels}>
 
                             <TouchableOpacity onPress={() => { this.props.navigation.navigate('Password_recovery') }}>
-                                <Text style={styles.haveAcount}>¿Olvidante tu contraseña?</Text>
+                                <Text style={styles.haveAcount}>¿Olvidaste tu contraseña?</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => { this.props.navigation.navigate('Sign_up') }}>
-                                <Text style={styles.haveAcount}>Registrate</Text>
+                                <Text style={styles.haveAcount}>Registrarte</Text>
                             </TouchableOpacity>
                         </View>
 

@@ -70,7 +70,7 @@ class MapViewScreen extends Component {
 
             return (
                 <View style={styles.containerIos}>
-                    <CustomHeader name={`Encuentranos`} context={this.props} />
+                    <CustomHeader name={`Encuéntranos`} context={this.props} />
                     <MapView
                         style={styles.mapIos}
                         // showsUserLocation={true}
