@@ -31,8 +31,8 @@ function Contacts(props) {
                         // maxZoomLevel={7}
                         // minZoomLevel={9}
                         initialRegion={{
-                            latitude: 18.4861446,
-                            longitude: -69.894265,
+                            latitude: 18.4452807,
+                            longitude: -69.9748689,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
@@ -40,7 +40,7 @@ function Contacts(props) {
 
                     
                         <Marker
-                            coordinate={{ latitude: 18.4861446, longitude: -69.894265 }}
+                            coordinate={{ latitude: 18.4452807, longitude: -69.9748689 }}
                             title='Ubicación de contacto'
                             image={require('../assets/images/resources/Marker-icon-ios.png')}
                         />
@@ -64,7 +64,7 @@ function Contacts(props) {
                     title="COMO LLEGAR"
                     iconContainerStyle={{ marginLeft: 50 }}
                     buttonStyle={styles.buttonstyle1}
-                    onPress={()=>{Linking.openURL(`geo:18.4861446,-69.894265`)}}
+                    onPress={()=>{Linking.openURL(`https://maps.apple.com/?q=ecopetroleo&ll=18.4452807,-69.9748689`)}}
 
                 />
 
@@ -87,16 +87,16 @@ function Contacts(props) {
                 </View>
 
                 <View style={styles.socialmediaButtons}>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('http://facebook.com/')}} >
+                    <TouchableOpacity onPress={()=>{Linking.openURL('http://facebook.com/EcoPetroleoDom')}} >
                         <Icon name="facebook" size={25} color='grey' />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('http://youtube.com/')}}>
+                    <TouchableOpacity onPress={()=>{Linking.openURL('http://youtube.com/channel/UCCgwNPnYq0yziwtOsGAbxBg')}}>
                         <Icon name="youtube" size={25} color='grey' />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('http://twitter.com/')}}>
+                    <TouchableOpacity onPress={()=>{Linking.openURL('http://twitter.com/ecopetroleodom?lang=es')}}>
                         <Icon name="twitter" size={25} color='grey' />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{Linking.openURL('http://instagram.com/')}}>
+                    <TouchableOpacity onPress={()=>{Linking.openURL('http://instagram.com/ecopetroleord/?hl=es-la')}}>
                         <Icon name="instagram" size={25} color='grey' />
                     </TouchableOpacity>
                 </View>
