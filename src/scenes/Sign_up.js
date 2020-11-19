@@ -25,12 +25,20 @@ class Sign_up extends Component {
             displayname: '',
             password: '',
             Hide_or_Show: true,
+           
         }
     }
 
     async userRegister(username, email, displayname, password) {
         const userRegisterResult = await new registerServices().userRegister(username, email, displayname, password)
-        console.log(userRegisterResult);
+        console.log(userRegisterResult.status);
+
+        if(userRegisterResult.status == 200){
+            this.props.navigation.navigate('Log_in');
+        }
+        else{
+            console.log('no')
+        }
     }
 
     onPressHide_or_Show() {
@@ -95,6 +103,10 @@ class Sign_up extends Component {
                         <TouchableOpacity style={styles.button1}
                             onPress={() => {
                                 this.userRegister(this.state.username, this.state.email, this.state.displayname, this.state.password)
+
+                               
+                                  
+                                
                             }} >
                             <Text style={styles.button1_text}>Registrarme</Text>
                         </TouchableOpacity>

@@ -126,7 +126,7 @@ class MapViewScreen extends Component {
         else if (Platform.OS === 'android') {
             return (
                 <View style={styles.containerAndroid}>
-                    <CustomHeader name={`Encuentranos`} context={this.props} />
+                    <CustomHeader name={`Encuéntranos`} context={this.props} />
 
                     <MapView
                         provider={PROVIDER_GOOGLE}

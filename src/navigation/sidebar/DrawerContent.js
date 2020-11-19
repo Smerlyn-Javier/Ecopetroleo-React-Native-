@@ -45,7 +45,7 @@ function DrawerContent(props) {
                                         name="google-maps" size={size} color={color}
                                     />
                                 )}
-                                label="ENCUENTRANOS"
+                                label="ENCUÉNTRANOS"
                                 labelStyle={styles.labelStyle}
                                 onPress={() => { props.navigation.navigate('MapViewScreen') }}
                             />
